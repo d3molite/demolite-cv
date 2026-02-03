@@ -1,0 +1,15 @@
+﻿@using System.Reflection
+@using Demolite.Cv.Ui.Components.Pages
+
+<Router AppAssembly="typeof(Program).Assembly" NotFoundPage="typeof(NotFound)" AdditionalAssemblies="_additionalAssemblies">
+    <Found Context="routeData">
+        <RouteView RouteData="routeData" DefaultLayout="typeof(MainLayout)"/>
+        <FocusOnNavigate RouteData="routeData" Selector="h1"/>
+    </Found>
+</Router>
+
+@code{
+
+    readonly Assembly[] _additionalAssemblies = [typeof(MainLayout).Assembly];
+
+}

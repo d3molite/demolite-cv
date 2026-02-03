@@ -1,0 +1,7 @@
+﻿services:
+  demolite.cv:
+    image: demolite.cv
+    build:
+      context: .
+      dockerfile: Demolite.Cv/Dockerfile
+
