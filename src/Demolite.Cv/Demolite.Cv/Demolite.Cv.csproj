@@ -15,6 +15,8 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\Demolite.Cv.Db\Demolite.Cv.Db.csproj" />
+      <ProjectReference Include="..\Demolite.Cv.Services\Demolite.Cv.Services.csproj" />
       <ProjectReference Include="..\Demolite.Cv.Ui\Demolite.Cv.Ui.csproj" />
     </ItemGroup>
 
@@ -22,6 +24,20 @@
       <_ContentIncludedByDefault Remove="Components\Layout\ReconnectModal.razor" />
       <_ContentIncludedByDefault Remove="Components\Pages\Counter.razor" />
       <_ContentIncludedByDefault Remove="Components\Pages\Weather.razor" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.EntityFrameworkCore" Version="10.0.2" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.2">
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      </PackageReference>
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="10.0.2" />
+      <PackageReference Include="MudBlazor" Version="9.0.0-preview.2" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="db\" />
     </ItemGroup>
 
 </Project>
