@@ -96,6 +96,18 @@ html, body {
     content: "";
 }
 
+.tp-mainheading{
+    font-size: 2.5rem;
+    font-weight: 200;
+    color: var(--foreground-primary);
+}
+
+.tp-subheading{
+    font-size: 1.75rem;
+    font-weight: 200;
+    letter-spacing: 0.1rem;
+}
+
 .tp-heading{
     font-size: 2rem;
     font-weight: 200;

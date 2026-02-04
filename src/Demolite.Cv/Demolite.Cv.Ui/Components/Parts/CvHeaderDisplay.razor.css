@@ -6,3 +6,23 @@
 @media screen and (max-width: 500px) {
     flex-direction: row;
 }
+
+.image-wrapper{
+    height: 180px !important;
+    width: 180px !important;
+    margin-right: 2rem;
+}
+
+.image-container{
+    height: 100%;
+    border: 3px solid var(--foreground-primary);
+    border-radius: 50% !important;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+}
+
+.image{
+    height: 250px !important;
+}

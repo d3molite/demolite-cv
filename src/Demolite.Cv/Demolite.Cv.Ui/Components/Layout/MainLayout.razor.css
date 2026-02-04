@@ -19,12 +19,6 @@
     overflow-x: scroll;
 }
 
-@media screen and (max-width: 500px){
-    .app{
-        padding: 0 !important;
-    }
-}
-
 #blazor-error-ui {
     color-scheme: light only;
     background: lightyellow;

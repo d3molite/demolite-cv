@@ -21,4 +21,8 @@
       <ProjectReference Include="..\Demolite.Cv.Interfaces\Demolite.Cv.Interfaces.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="wwwroot\" />
+    </ItemGroup>
+
 </Project>
