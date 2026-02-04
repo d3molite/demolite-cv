@@ -9,7 +9,7 @@
             <img class="image" src="img/photos/cv.jpg" alt="Photo of Applicant"/>
         </div>
     </div>
-    <Stack Row="true" class="w-100 justify-content-evenly mobile-90">
+    <Stack Row="true" class="w-100 justify-content-evenly mobile-90 stack-flat medium-90">
         <Stack Class="w-50 mobile-90">
             <div class="tp-mainheading">
                 @Name
@@ -18,7 +18,7 @@
                 CURRICULUM&nbsp;VITAE
             </div>
         </Stack>
-        <Stack Row="true" Class="w-75 mobile-90 gap-4">
+        <Stack Class="w-50 mobile-90 medium-90 gap-4">
             <div class="d-flex flex-row align-items-center gap-2">
                 <MudIcon Icon="@Icons.Material.Outlined.LocationOn" Class="h-100" Size="Size.Large"/>
                 <div class="tp-content">
@@ -28,19 +28,21 @@
             <div class="d-flex flex-row align-items-center gap-2">
                 <MudIcon Icon="@Icons.Material.Outlined.Mail" Class="h-100" Size="Size.Large"/>
                 <div class="tp-content">
-                    @Profile?.Mail
+                    <a href="@($"mailto://{Profile?.Mail}")">
+                        @Profile?.Mail
+                    </a>
                 </div>
             </div>
         </Stack>
     </Stack>
-    
+
 </Stack>
 
 @code {
 
     [Inject]
     public IDbRepository<Profile> ProfileRepository { get; set; } = null!;
-    
+
     private Profile? Profile { get; set; }
 
     private MarkupString Name

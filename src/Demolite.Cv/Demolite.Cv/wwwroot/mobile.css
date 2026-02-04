@@ -3,3 +3,9 @@
         width: 90% !important;
     }
 }
+
+.medium-90{
+    @media screen and (max-width: 1400px){
+        width: 90% !important;
+    }
+}

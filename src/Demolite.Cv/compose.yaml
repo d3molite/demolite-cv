@@ -1,7 +1,18 @@
 ﻿services:
   demolite.cv:
-    image: demolite.cv
+    image: hub.demolite.de/demoreg/demolite.cv
+    container_name: demolite.cv
+    restart: always
+    env_file:
+      - .env
     build:
       context: .
       dockerfile: Demolite.Cv/Dockerfile
-
+      args:
+        - CERT_PASS=${cert_pass}
+    ports:
+      - "8100:80"
+      - "8101:443"
+    volumes:
+      - "./db/:/app/db/"
+      - "./photos/:/app/wwwroot/img/photos/"

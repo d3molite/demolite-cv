@@ -8,3 +8,9 @@
         flex-direction: column !important;
     }
 }
+
+@media screen and (max-width: 1700px) {
+    .stack-flat{
+        flex-direction: column !important;
+    }
+}

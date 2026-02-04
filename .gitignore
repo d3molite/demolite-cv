@@ -3,3 +3,4 @@
 **/obj/**
 **/app.db*
 **/img/photos/**
+*.env

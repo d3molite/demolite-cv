@@ -35,13 +35,27 @@
 
     private MarkupString Description => IsGerman ? (MarkupString)EducationEntry.Description : (MarkupString)EducationEntry.DescriptionEn;
 
-    private string Grade => IsGerman ? $"Note: {EducationEntry.Grade}" : $"Grade: {EducationEntry.Grade}";
+    private string Grade
+    {
+        get
+        {
+            if (string.IsNullOrWhiteSpace(EducationEntry.Grade))
+                return string.Empty;
+            
+            return IsGerman ? $"Note: {EducationEntry.Grade}" : $"Grade: {EducationEntry.Grade}";
+        }
+    }
 
     private string GetDate()
     {
+        var format = "MM/yyyy";
+        
+        if(string.IsNullOrWhiteSpace(EducationEntry.Grade))
+            format = "yyyy";
+            
         var sb = new StringBuilder();
 
-        sb.Append(EducationEntry.StartDate.ToString("MM/yyyy"));
+        sb.Append(EducationEntry.StartDate.ToString(format));
 
         sb.Append(" - ");
 
@@ -49,7 +63,7 @@
             sb.Append(IsGerman ? "Heute" : "Today");
 
         else
-            sb.Append(EducationEntry.EndDate.Value.ToString("MM/yyyy"));
+            sb.Append(EducationEntry.EndDate.Value.ToString(format));
 
         return sb.ToString();
     }
