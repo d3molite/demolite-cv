@@ -1,9 +1,11 @@
-﻿@using Demolite.Cv.Db.Models
+﻿@using System.Text
+@using System.Web
+@using Demolite.Cv.Db.Models
 @using Demolite.Cv.Interfaces.Repositories
 
 <PageTitle>@Name</PageTitle>
 
-<Stack Row="true" Class="w-50 mobile-90 align-items-center justify-content-evenly mb-4 mt-2 border-section">
+<Stack Row="true" Class="w-50 mobile-90 align-items-center justify-content-evenly mb-4 mt-2">
     <div class="image-wrapper">
         <div class="image-container">
             <img class="image" src="img/photos/cv.jpg" alt="Photo of Applicant"/>
@@ -28,7 +30,7 @@
             <div class="d-flex flex-row align-items-center gap-2">
                 <MudIcon Icon="@Icons.Material.Outlined.Mail" Class="h-100" Size="Size.Large"/>
                 <div class="tp-content">
-                    <a href="@($"mailto://{Profile?.Mail}")">
+                    <a href="@MailLink()">
                         @Profile?.Mail
                     </a>
                 </div>
@@ -44,6 +46,19 @@
     public IDbRepository<Profile> ProfileRepository { get; set; } = null!;
 
     private Profile? Profile { get; set; }
+
+    private string MailLink()
+    {
+        if (Profile is null)
+            return string.Empty;
+
+        var sb = new StringBuilder();
+
+        sb.Append("mailto://");
+        sb.Append(HttpUtility.UrlEncode(Profile.Mail));
+
+        return sb.ToString();
+    }
 
     private MarkupString Name
     {

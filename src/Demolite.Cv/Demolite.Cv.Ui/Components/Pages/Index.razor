@@ -1,21 +1,44 @@
 ﻿@page "/"
+@inherits AbstractLocalizedDisplay
 @using Demolite.Cv.Interfaces.Models
 
 <CvHeaderDisplay/>
 
-@foreach (var entry in CvEntries)
-{
-    if (entry is IWorkEntry workEntry)
-    {
-        <WorkEntryDisplay WorkEntry="workEntry"/>
-        <div class="spacer"></div>
-    }
+<MudTabs Class="w-50 mobile-90 tab-border" Centered="true" Color="Color.Dark" TabHeaderClass="tab-header" SliderColor="Color.Primary">
+    <MudTabPanel Text="@Experience" Icon="@Icons.Material.Outlined.WorkHistory" Class="w-100 d-flex">
+        <div class="spacer-small"></div>
+        @foreach (var entry in CvEntries)
+        {
+            switch (entry)
+            {
+                case IWorkEntry workEntry:
+                    <WorkEntryDisplay WorkEntry="workEntry"/>
+                    break;
 
-    if (entry is IEducationEntry educationEntry)
-    {
-        <EducationEntryDisplay EducationEntry="educationEntry"/>
-        <div class="spacer"></div>
-    }
-}
+                case IEducationEntry educationEntry:
+                    <EducationEntryDisplay EducationEntry="educationEntry"/>
+                    break;
+            }
+            <div class="spacer"></div>
+        }
+    </MudTabPanel>
+    <MudTabPanel Text="@Skills" Icon="@Icons.Material.Outlined.Lightbulb" Class="w-100 d-flex">
+        <div class="spacer-small"></div>
+        @foreach (var skillEntry in SkillEntries)
+        {
+            <SkillEntryDisplay SkillEntry="skillEntry"/>
+
+            <div class="spacer"></div>
+        }
+    </MudTabPanel>
+</MudTabs>
 
 <div class="spacer"></div>
+
+@code{
+
+    private string Experience => IsGerman ? "Erfahrung" : "Experience";
+
+    private string Skills => IsGerman ? "Skills" : "Skills";
+
+}

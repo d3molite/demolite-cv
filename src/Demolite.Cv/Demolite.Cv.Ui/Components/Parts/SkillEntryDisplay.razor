@@ -1,0 +1,24 @@
+﻿@using Demolite.Cv.Interfaces.Models
+
+@inherits AbstractLocalizedDisplay
+
+<Stack Class="w-100">
+    <div class="tp-heading">
+        <MudIcon Icon="@Icons.Material.Outlined.Lightbulb"/>
+        @Title
+    </div>
+    <div class="tp-content-lg">
+        @Description
+    </div>
+</Stack>
+
+@code {
+
+    [Parameter]
+    public required ISkillEntry SkillEntry { get; set; }
+    
+    private string Title => IsGerman ? SkillEntry.Title : SkillEntry.TitleEn;
+
+    private MarkupString Description => IsGerman ? (MarkupString)SkillEntry.Skills : (MarkupString)SkillEntry.SkillsEn;
+
+}

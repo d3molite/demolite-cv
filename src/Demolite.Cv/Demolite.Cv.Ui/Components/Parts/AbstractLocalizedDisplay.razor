@@ -1,10 +1,13 @@
-﻿@using Demolite.Cv.Interfaces.Services
+﻿@using Demolite.Cv.Common.Enum
+@using Demolite.Cv.Interfaces.Services
 @inherits LayoutComponentBase
 
 @code {
 
     [Inject]
     public ILanguageService LanguageService { get; set; } = null!;
+
+    public bool IsGerman => LanguageService.Language is DisplayLanguage.German;
 
     protected override void OnInitialized()
     {

@@ -12,4 +12,6 @@ public class CvDbContext(DbContextOptions<CvDbContext> options) : DbContext(opti
 	public DbSet<SocialLink> SocialLinks { get; set; } = null!;
 
 	public DbSet<Profile> Profiles { get; set; } = null!;
+
+	public DbSet<SkillEntry> SkillEntries { get; set; } = null!;
 }

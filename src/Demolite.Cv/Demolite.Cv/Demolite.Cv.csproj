@@ -38,6 +38,7 @@
 
     <ItemGroup>
       <Folder Include="db\" />
+      <Folder Include="wwwroot\img\photos\" />
     </ItemGroup>
 
 </Project>
