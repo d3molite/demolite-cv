@@ -8,4 +8,8 @@ public class CvDbContext(DbContextOptions<CvDbContext> options) : DbContext(opti
 	public DbSet<WorkEntry> WorkEntries { get; set; } = null!;
 
 	public DbSet<EducationEntry> EducationEntries { get; set; } = null!;
+
+	public DbSet<SocialLink> SocialLinks { get; set; } = null!;
+
+	public DbSet<Profile> Profiles { get; set; } = null!;
 }

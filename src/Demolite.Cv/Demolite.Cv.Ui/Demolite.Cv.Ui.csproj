@@ -18,6 +18,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\Demolite.Cv.Db\Demolite.Cv.Db.csproj" />
       <ProjectReference Include="..\Demolite.Cv.Interfaces\Demolite.Cv.Interfaces.csproj" />
     </ItemGroup>
 

@@ -1,19 +1,73 @@
-﻿<Stack Row="true" Class="mobile-90 align-items-center justify-content-evenly mb-4 mt-2">
+﻿@using Demolite.Cv.Db.Models
+@using Demolite.Cv.Interfaces.Repositories
+
+<PageTitle>@Name</PageTitle>
+
+<Stack Row="true" Class="w-50 mobile-90 align-items-center justify-content-evenly mb-4 mt-2 border-section">
     <div class="image-wrapper">
         <div class="image-container">
             <img class="image" src="img/photos/cv.jpg" alt="Photo of Applicant"/>
         </div>
     </div>
-    <Stack class="w-50 align-items-center justify-content-center">
-        <div class="tp-mainheading">
-            TOBIAS&nbsp;BRINKE
-        </div>
-        <div class="tp-subheading">
-            CURRICULUM&nbsp;VITAE
-        </div>
+    <Stack Row="true" class="w-100 justify-content-evenly mobile-90">
+        <Stack Class="w-50 mobile-90">
+            <div class="tp-mainheading">
+                @Name
+            </div>
+            <div class="tp-subheading">
+                CURRICULUM&nbsp;VITAE
+            </div>
+        </Stack>
+        <Stack Row="true" Class="w-75 mobile-90 gap-4">
+            <div class="d-flex flex-row align-items-center gap-2">
+                <MudIcon Icon="@Icons.Material.Outlined.LocationOn" Class="h-100" Size="Size.Large"/>
+                <div class="tp-content">
+                    @Address
+                </div>
+            </div>
+            <div class="d-flex flex-row align-items-center gap-2">
+                <MudIcon Icon="@Icons.Material.Outlined.Mail" Class="h-100" Size="Size.Large"/>
+                <div class="tp-content">
+                    @Profile?.Mail
+                </div>
+            </div>
+        </Stack>
     </Stack>
+    
 </Stack>
 
 @code {
+
+    [Inject]
+    public IDbRepository<Profile> ProfileRepository { get; set; } = null!;
+    
+    private Profile? Profile { get; set; }
+
+    private MarkupString Name
+    {
+        get
+        {
+            if (Profile is null)
+                return (MarkupString)string.Empty;
+
+            return (MarkupString)Profile.Name;
+        }
+    }
+
+    private MarkupString Address
+    {
+        get
+        {
+            if (Profile is null)
+                return (MarkupString)string.Empty;
+
+            return (MarkupString)Profile.Address;
+        }
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        Profile = (await ProfileRepository.GetAll()).FirstOrDefault();
+    }
 
 }

@@ -1,9 +1,37 @@
 ﻿@inherits AbstractLocalizedDisplay
 
+@using System.Reflection
 @using Demolite.Cv.Common.Enum
+@using Demolite.Cv.Db.Models
+@using Demolite.Cv.Interfaces.Repositories
 
 <div class="border-section">
-    <MudStack Row="true" Class="w-100" Justify="Justify.FlexEnd">
+    <MudStack Row="true" Class="w-100 px-1" Justify="Justify.SpaceBetween" AlignItems="AlignItems.Center">
+        <MudStack Row="true" AlignItems="AlignItems.Center">
+            @foreach (var link in SocialLinks)
+            {
+                <a href="@link.Link">
+                    <MudIcon Icon="@GetIconFromName(link.GlyphName)" Size="Size.Large" Color="Color.Primary"/>
+                </a>
+            }
+        </MudStack>
+        @if (NavManager.Uri.Contains("imprint"))
+        {
+            <a href="/">
+                <div class="tp-content">
+                    Home
+                </div>
+            </a>
+        }
+        else
+        {
+            <a href="imprint">
+                <div class="tp-content">
+                    Imprint
+                </div>
+            </a>
+        }
+        
         <MudToggleGroup T="DisplayLanguage" @bind-Value="CurrentLanguage">
             <MudToggleItem Value="DisplayLanguage.German" Text="DE"></MudToggleItem>
             <MudToggleItem Value="DisplayLanguage.English" Text="EN"></MudToggleItem>
@@ -13,10 +41,31 @@
 
 @code {
 
+    [Inject]
+    public IDbRepository<SocialLink> SocialLinkRepository { get; set; } = null!;
+
+    [Inject]
+    public NavigationManager NavManager { get; set; } = null!;
+
+    private SocialLink[] SocialLinks { get; set; } = [];
+
+    protected override async Task OnInitializedAsync()
+    {
+        SocialLinks = await SocialLinkRepository.GetAll();
+        NavManager.LocationChanged += async (_, _) => await InvokeAsync(StateHasChanged);
+        await base.OnInitializedAsync();
+    }
+
     public DisplayLanguage CurrentLanguage
     {
         get => LanguageService.Language;
         set => LanguageService.SetLanguage(value);
+    }
+
+    private static string? GetIconFromName(string glyphName)
+    {
+        var fieldInfo = typeof(Icons.Custom.Brands).GetField(glyphName, BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy);
+        return fieldInfo?.GetValue(null) as string;
     }
 
 }

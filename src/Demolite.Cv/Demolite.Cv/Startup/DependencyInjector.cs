@@ -31,6 +31,8 @@ public static class DependencyInjector
 
 	private static void InjectRepositories(this IServiceCollection services)
 	{
+		services.AddScoped<IDbRepository<Profile>, ProfileRepository>();
+		services.AddScoped<IDbRepository<SocialLink>, SocialLinkRepository>();
 		services.AddScoped<IDbRepository<WorkEntry>, WorkEntryRepository>();
 		services.AddScoped<IDbRepository<EducationEntry>, EducationEntryRepository>();
 	}
