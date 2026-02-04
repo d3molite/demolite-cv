@@ -1,0 +1,54 @@
+﻿@using System.Text
+@using Demolite.Cv.Common.Enum
+@using Demolite.Cv.Interfaces.Models
+@inherits AbstractLocalizedDisplay
+
+<Stack Class="w-50 mobile-90">
+    <div class="tp-heading">
+        @Title
+    </div>
+    <Stack Row="true" Class="w-100 justify-content-between">
+        <div class="tp-bold w-50">
+            @WorkEntry.CompanyName
+        </div>
+        <div class="tp-bold">
+            @WorkEntry.Location
+        </div>
+        <div class="tp-bold">
+            @GetDate()
+        </div>
+    </Stack>
+    <div class="tp-content">
+        @Description
+    </div>
+</Stack>
+
+@code {
+
+    [Parameter]
+    public required IWorkEntry WorkEntry { get; set; }
+
+    private bool IsGerman => LanguageService.Language is DisplayLanguage.German;
+
+    private string Title => IsGerman ? WorkEntry.Title : WorkEntry.TitleEn;
+
+    private string Description => IsGerman ? WorkEntry.Description : WorkEntry.DescriptionEn;
+
+    private string GetDate()
+    {
+        var sb = new StringBuilder();
+
+        sb.Append(WorkEntry.StartDate.ToString("MM/yyyy"));
+
+        sb.Append(" - ");
+        
+        if (WorkEntry.EndDate is null)
+            sb.Append(IsGerman ? "Heute" : "Today");
+        
+        else
+            sb.Append(WorkEntry.EndDate.Value.ToString("MM/yyyy"));
+
+        return sb.ToString();
+    }
+
+}

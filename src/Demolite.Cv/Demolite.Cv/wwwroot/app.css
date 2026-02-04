@@ -1,6 +1,43 @@
 :root{
     --background: #191C24;
     --foreground: #fff;
+    --foreground-primary: #0B9FAD;
+}
+
+/* roboto-100 - latin */
+@font-face {
+    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 100;
+    src: url('./fonts/roboto-v50-latin-100.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+/* roboto-200 - latin */
+@font-face {
+    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 200;
+    src: url('./fonts/roboto-v50-latin-200.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+/* roboto-300 - latin */
+@font-face {
+    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 300;
+    src: url('./fonts/roboto-v50-latin-300.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+/* roboto-regular - latin */
+@font-face {
+    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    src: url('./fonts/roboto-v50-latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 
 html, body {
@@ -17,13 +54,6 @@ html, body {
     font-family: Roboto !important;
 }
 
-@font-face {
-    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 400;
-    src: url('./fonts/roboto-v50-latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
-}
 
 
 .valid.modified:not([type=checkbox]) {
@@ -59,4 +89,25 @@ html, body {
 
 .form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
     text-align: start;
+}
+
+.spacer{
+    margin-top: 3rem;
+    content: "";
+}
+
+.tp-heading{
+    font-size: 2rem;
+    font-weight: 200;
+    color: var(--foreground-primary);
+}
+
+.tp-bold{
+    font-size: 1.5rem;
+    font-weight: 300;
+}
+
+.tp-content{
+    font-size: 1.2rem;
+    font-weight: 200;
 }

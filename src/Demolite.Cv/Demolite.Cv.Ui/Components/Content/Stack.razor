@@ -1,0 +1,26 @@
+﻿@using System.Text
+<div class="stack @Class" style="@Style()">
+    @ChildContent
+</div>
+
+@code {
+
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+    
+    [Parameter]
+    public bool Row { get; set; }
+
+    [Parameter]
+    public string Class { get; set; } = string.Empty;
+
+    private string Style()
+    {
+        var sb = new StringBuilder();
+
+        sb.Append(Row ? "flex-direction: row;" : "flex-direction: column;");
+
+        return sb.ToString();
+    }
+
+}

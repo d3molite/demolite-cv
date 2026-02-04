@@ -1,0 +1,10 @@
+.stack{
+    display: flex;
+    gap: 0.3rem;
+}
+
+@media screen and (max-width: 500px) {
+    .stack{
+        flex-direction: column !important;
+    }
+}

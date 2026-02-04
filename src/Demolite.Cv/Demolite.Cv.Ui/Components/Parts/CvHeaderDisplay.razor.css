@@ -1,0 +1,8 @@
+﻿.cv-header{
+    display: flex;
+    flex-direction: column;
+}
+
+@media screen and (max-width: 500px) {
+    flex-direction: row;
+}
