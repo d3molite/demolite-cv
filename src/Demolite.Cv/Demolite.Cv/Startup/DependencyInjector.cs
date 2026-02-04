@@ -32,6 +32,7 @@ public static class DependencyInjector
 	private static void InjectRepositories(this IServiceCollection services)
 	{
 		services.AddScoped<IDbRepository<WorkEntry>, WorkEntryRepository>();
+		services.AddScoped<IDbRepository<EducationEntry>, EducationEntryRepository>();
 	}
 
 	private static void InjectServices(this IServiceCollection services)

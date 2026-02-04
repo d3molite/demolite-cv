@@ -1,8 +1,6 @@
 using Demolite.Cv.Components;
-using Demolite.Cv.Db;
 using Demolite.Cv.Startup;
 using Demolite.Cv.Ui.Components.Layout;
-using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,9 +27,5 @@ app.UseAntiforgery();
 app.MapStaticAssets();
 app.MapRazorComponents<App>().AddInteractiveServerRenderMode().AddAdditionalAssemblies(typeof(MainLayout).Assembly);
 
-var factory = app.Services.GetRequiredService<IDbContextFactory<CvDbContext>>();
-var db = await factory.CreateDbContextAsync();
-
-await db.Database.MigrateAsync();
-
+await app.MigrateDatabaseAsync();
 await app.RunAsync();

@@ -5,15 +5,15 @@
 
 <Stack Class="w-50 mobile-90">
     <div class="tp-heading">
-        <MudIcon Icon="@Icons.Material.Outlined.Work"/>
+        <MudIcon Icon="@Icons.Material.Outlined.School"/>
         @Title
     </div>
     <Stack Row="true" Class="w-100 justify-content-between">
         <div class="tp-bold w-50">
-            @WorkEntry.CompanyName
+            @EducationEntry.SchoolName
         </div>
         <div class="tp-bold">
-            @WorkEntry.Location
+            @Grade
         </div>
         <div class="tp-bold">
             @GetDate()
@@ -27,27 +27,29 @@
 @code {
 
     [Parameter]
-    public required IWorkEntry WorkEntry { get; set; }
+    public required IEducationEntry EducationEntry { get; set; }
 
     private bool IsGerman => LanguageService.Language is DisplayLanguage.German;
 
-    private string Title => IsGerman ? WorkEntry.Title : WorkEntry.TitleEn;
+    private string Title => IsGerman ? EducationEntry.Title : EducationEntry.TitleEn;
 
-    private MarkupString Description => IsGerman ? (MarkupString)WorkEntry.Description : (MarkupString)WorkEntry.DescriptionEn;
+    private MarkupString Description => IsGerman ? (MarkupString)EducationEntry.Description : (MarkupString)EducationEntry.DescriptionEn;
+
+    private string Grade => IsGerman ? $"Note: {EducationEntry.Grade}" : $"Grade: {EducationEntry.Grade}";
 
     private string GetDate()
     {
         var sb = new StringBuilder();
 
-        sb.Append(WorkEntry.StartDate.ToString("MM/yyyy"));
+        sb.Append(EducationEntry.StartDate.ToString("MM/yyyy"));
 
         sb.Append(" - ");
-        
-        if (WorkEntry.EndDate is null)
+
+        if (EducationEntry.EndDate is null)
             sb.Append(IsGerman ? "Heute" : "Today");
-        
+
         else
-            sb.Append(WorkEntry.EndDate.Value.ToString("MM/yyyy"));
+            sb.Append(EducationEntry.EndDate.Value.ToString("MM/yyyy"));
 
         return sb.ToString();
     }

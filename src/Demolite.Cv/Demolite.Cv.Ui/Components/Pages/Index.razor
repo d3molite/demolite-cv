@@ -12,4 +12,10 @@
         <WorkEntryDisplay WorkEntry="workEntry"/>
         <div class="spacer"></div>
     }
+
+    if (entry is IEducationEntry educationEntry)
+    {
+        <EducationEntryDisplay EducationEntry="educationEntry"/>
+        <div class="spacer"></div>
+    }
 }
