@@ -1,0 +1,14 @@
+﻿@using Demolite.Cv.Interfaces.Services
+@inherits LayoutComponentBase
+
+@code {
+
+    [Inject]
+    public ILanguageService LanguageService { get; set; } = null!;
+
+    protected override void OnInitialized()
+    {
+        LanguageService.LanguageChanged += async (_, _) => await InvokeAsync(StateHasChanged);
+    }
+
+}

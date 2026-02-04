@@ -1,0 +1,19 @@
+﻿@inherits AbstractLocalizedDisplay
+
+@using Demolite.Cv.Common.Enum
+
+<MudStack Row="true" Class="w-100" Justify="Justify.FlexEnd">
+    <MudToggleGroup T="DisplayLanguage" @bind-Value="CurrentLanguage">
+        <MudToggleItem Value="DisplayLanguage.German" Text="DE"></MudToggleItem>
+        <MudToggleItem Value="DisplayLanguage.English" Text="EN"></MudToggleItem>
+    </MudToggleGroup>
+</MudStack>
+
+@code {
+    
+    public DisplayLanguage CurrentLanguage
+    {
+        get => LanguageService.Language;
+        set => LanguageService.SetLanguage(value);
+    }
+}

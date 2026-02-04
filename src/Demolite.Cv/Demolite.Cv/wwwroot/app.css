@@ -12,9 +12,19 @@ html, body {
     min-width: 100vw !important;
     padding: 0 !important;
     margin: 0 !important;
-    background: var(--background);
-    color: var(--foreground);
+    background: var(--background) !important;
+    color: var(--foreground) !important;
+    font-family: Roboto !important;
 }
+
+@font-face {
+    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    src: url('./fonts/roboto-v50-latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
 
 .valid.modified:not([type=checkbox]) {
     outline: 1px solid #26b050;
