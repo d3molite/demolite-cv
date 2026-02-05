@@ -42,12 +42,12 @@
         </Stack>
     </Stack>
     <MudExpansionPanels Class="w-100 border-blue" Elevation="0" Dense="true" MultiExpansion="true">
-        <MudExpansionPanel Text="About Me">
+        <MudExpansionPanel Text="@AboutHeader">
             <div class="tp-content">
                 @About
             </div>
         </MudExpansionPanel>
-        <MudExpansionPanel Text="Persönliche Interessen">
+        <MudExpansionPanel Text="@InterestsHeader">
             <div class="tp-content pb-3">
                 @Hobbies
             </div>
@@ -80,6 +80,10 @@
     private MarkupString Address => Profile is null ? (MarkupString)string.Empty : (MarkupString)Profile.Address;
 
     private string About => Profile is null ? string.Empty : LocalizeProperty(Profile, x => x.About);
+
+    private string AboutHeader => IsGerman ? "Über mich" : "About me";
+
+    private string InterestsHeader => IsGerman ? "Interessen & Hobbies" : "Interests & Hobbies";
     
     private string Hobbies => Profile is null ? string.Empty : LocalizeProperty(Profile, x => x.Hobbies);
 
