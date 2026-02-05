@@ -1,4 +1,6 @@
-﻿@using Demolite.Cv.Common.Enum
+﻿@using System.Linq.Expressions
+@using Demolite.Cv.Common.Enum
+@using Demolite.Cv.Common.Helpers
 @using Demolite.Cv.Interfaces.Services
 @inherits LayoutComponentBase
 
@@ -7,11 +9,19 @@
     [Inject]
     public ILanguageService LanguageService { get; set; } = null!;
 
-    public bool IsGerman => LanguageService.Language is DisplayLanguage.German;
+    protected bool IsGerman => LanguageService.Language is DisplayLanguage.German;
 
     protected override void OnInitialized()
     {
         LanguageService.LanguageChanged += async (_, _) => await InvokeAsync(StateHasChanged);
     }
+
+    protected MarkupString LocalizePropertyMarkup<T>(T obj, Expression<Func<T, string>> property)
+        where T : class
+        => (MarkupString)LocalizeProperty(obj, property);
+
+    protected string LocalizeProperty<T>(T obj, Expression<Func<T, string>> property)
+        where T : class
+        => obj.GetLocalizedPropertyValue(property, IsGerman);
 
 }

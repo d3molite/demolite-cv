@@ -1,5 +1,4 @@
 ﻿@using System.Text
-@using Demolite.Cv.Common.Enum
 @using Demolite.Cv.Interfaces.Models
 @inherits AbstractLocalizedDisplay
 
@@ -9,7 +8,7 @@
         @Title
     </div>
     <Stack Row="true" Class="w-100 justify-content-between">
-        <div class="tp-bold w-50">
+        <div class="tp-bold w-50 mobile-90">
             @EducationEntry.SchoolName
         </div>
         <div class="tp-bold">
@@ -28,12 +27,10 @@
 
     [Parameter]
     public required IEducationEntry EducationEntry { get; set; }
+    
+    private string Title => LocalizeProperty(EducationEntry, x => x.Title);
 
-    private bool IsGerman => LanguageService.Language is DisplayLanguage.German;
-
-    private string Title => IsGerman ? EducationEntry.Title : EducationEntry.TitleEn;
-
-    private MarkupString Description => IsGerman ? (MarkupString)EducationEntry.Description : (MarkupString)EducationEntry.DescriptionEn;
+    private MarkupString Description => LocalizePropertyMarkup(EducationEntry, x => x.Description);
 
     private string Grade
     {

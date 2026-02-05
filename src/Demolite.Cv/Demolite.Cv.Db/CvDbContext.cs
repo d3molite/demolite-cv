@@ -14,4 +14,6 @@ public class CvDbContext(DbContextOptions<CvDbContext> options) : DbContext(opti
 	public DbSet<Profile> Profiles { get; set; } = null!;
 
 	public DbSet<SkillEntry> SkillEntries { get; set; } = null!;
+
+	public DbSet<ProjectEntry> ProjectEntries { get; set; } = null!;
 }

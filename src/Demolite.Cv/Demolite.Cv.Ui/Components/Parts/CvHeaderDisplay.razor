@@ -3,41 +3,56 @@
 @using Demolite.Cv.Db.Models
 @using Demolite.Cv.Interfaces.Repositories
 
+@inherits AbstractLocalizedDisplay
+
 <PageTitle>@Name</PageTitle>
 
-<Stack Row="true" Class="w-50 mobile-90 align-items-center justify-content-evenly mb-4 mt-2">
-    <div class="image-wrapper">
-        <div class="image-container">
-            <img class="image" src="img/photos/cv.jpg" alt="Photo of Applicant"/>
+<Stack Class="w-50 mobile-90 mb-4">
+    <Stack Row="true" Class="w-100 align-items-center justify-content-evenly mb-4 mt-2">
+        <div class="image-wrapper">
+            <div class="image-container">
+                <img class="image" src="img/photos/cv.jpg" alt="Photo of Applicant"/>
+            </div>
         </div>
-    </div>
-    <Stack Row="true" class="w-100 justify-content-evenly mobile-90 stack-flat medium-90">
-        <Stack Class="w-50 mobile-90">
-            <div class="tp-mainheading">
-                @Name
-            </div>
-            <div class="tp-subheading">
-                CURRICULUM&nbsp;VITAE
-            </div>
-        </Stack>
-        <Stack Class="w-50 mobile-90 medium-90 gap-4">
-            <div class="d-flex flex-row align-items-center gap-2">
-                <MudIcon Icon="@Icons.Material.Outlined.LocationOn" Class="h-100" Size="Size.Large"/>
-                <div class="tp-content">
-                    @Address
+        <Stack Row="true" class="w-100 justify-content-evenly mobile-90 stack-flat medium-90">
+            <Stack Class="w-50 mobile-90">
+                <div class="tp-mainheading">
+                    @Name
                 </div>
-            </div>
-            <div class="d-flex flex-row align-items-center gap-2">
-                <MudIcon Icon="@Icons.Material.Outlined.Mail" Class="h-100" Size="Size.Large"/>
-                <div class="tp-content">
-                    <a href="@MailLink()">
-                        @Profile?.Mail
-                    </a>
+                <div class="tp-subheading">
+                    CURRICULUM&nbsp;VITAE
                 </div>
-            </div>
+            </Stack>
+            <Stack Class="w-50 mobile-90 medium-90 gap-4">
+                <div class="d-flex flex-row align-items-center gap-2">
+                    <MudIcon Icon="@Icons.Material.Outlined.LocationOn" Class="h-100" Size="Size.Large"/>
+                    <div class="tp-content">
+                        @Address
+                    </div>
+                </div>
+                <div class="d-flex flex-row align-items-center gap-2">
+                    <MudIcon Icon="@Icons.Material.Outlined.Mail" Class="h-100" Size="Size.Large"/>
+                    <div class="tp-content">
+                        <a href="@MailLink()">
+                            @Profile?.Mail
+                        </a>
+                    </div>
+                </div>
+            </Stack>
         </Stack>
     </Stack>
-
+    <MudExpansionPanels Class="w-100 border-blue" Elevation="0" Dense="true" MultiExpansion="true">
+        <MudExpansionPanel Text="About Me">
+            <div class="tp-content">
+                @About
+            </div>
+        </MudExpansionPanel>
+        <MudExpansionPanel Text="Persönliche Interessen">
+            <div class="tp-content pb-3">
+                @Hobbies
+            </div>
+        </MudExpansionPanel>
+    </MudExpansionPanels>
 </Stack>
 
 @code {
@@ -60,27 +75,13 @@
         return sb.ToString();
     }
 
-    private MarkupString Name
-    {
-        get
-        {
-            if (Profile is null)
-                return (MarkupString)string.Empty;
+    private MarkupString Name => Profile is null ? (MarkupString)string.Empty : (MarkupString)Profile.Name;
 
-            return (MarkupString)Profile.Name;
-        }
-    }
+    private MarkupString Address => Profile is null ? (MarkupString)string.Empty : (MarkupString)Profile.Address;
 
-    private MarkupString Address
-    {
-        get
-        {
-            if (Profile is null)
-                return (MarkupString)string.Empty;
-
-            return (MarkupString)Profile.Address;
-        }
-    }
+    private string About => Profile is null ? string.Empty : LocalizeProperty(Profile, x => x.About);
+    
+    private string Hobbies => Profile is null ? string.Empty : LocalizeProperty(Profile, x => x.Hobbies);
 
     protected override async Task OnInitializedAsync()
     {

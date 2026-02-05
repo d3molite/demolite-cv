@@ -1,0 +1,44 @@
+﻿@using Demolite.Cv.Db.Models
+@inherits AbstractLocalizedDisplay
+
+<Stack Class="w-100 gap-2">
+    <div class="tp-heading">
+        @Title
+    </div>
+    <Stack Row="true" Class="w-100 justify-content-between">
+        <div class="tp-bold w-50 mobile-90">
+            @GetCompany()
+        </div>
+        <div class="tp-bold">
+            @ProjectEntry.StartDate.ToString("MM/yyyy")
+        </div>
+    </Stack>
+    <div class="tp-content">
+        @Description
+    </div>
+    <div class="tp-bold">
+        Skills:
+    </div>
+    <div class="tp-content">
+        @ProjectEntry.Skills
+    </div>
+</Stack>
+
+@code {
+
+    [Parameter]
+    public required ProjectEntry ProjectEntry { get; set; }
+    
+    private string Title => LocalizeProperty(ProjectEntry, x => x.Title);
+
+    private MarkupString Description => LocalizePropertyMarkup(ProjectEntry, x => x.Description);
+
+    private string GetCompany()
+    {
+        if (ProjectEntry.CompanyName is null)
+            return IsGerman ? "Privat" : "Private";
+
+        return ProjectEntry.CompanyName;
+    }
+
+}

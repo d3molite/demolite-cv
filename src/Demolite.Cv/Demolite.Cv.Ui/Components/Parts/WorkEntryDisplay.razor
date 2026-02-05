@@ -9,7 +9,7 @@
         @Title
     </div>
     <Stack Row="true" Class="w-100 justify-content-between">
-        <div class="tp-bold w-50">
+        <div class="tp-bold w-50 mobile-90">
             @WorkEntry.CompanyName
         </div>
         <div class="tp-bold">
@@ -29,11 +29,9 @@
     [Parameter]
     public required IWorkEntry WorkEntry { get; set; }
 
-    private bool IsGerman => LanguageService.Language is DisplayLanguage.German;
+    private string Title => LocalizeProperty(WorkEntry, x => x.Title);
 
-    private string Title => IsGerman ? WorkEntry.Title : WorkEntry.TitleEn;
-
-    private MarkupString Description => IsGerman ? (MarkupString)WorkEntry.Description : (MarkupString)WorkEntry.DescriptionEn;
+    private MarkupString Description => LocalizePropertyMarkup(WorkEntry, x => x.Description);
 
     private string GetDate()
     {

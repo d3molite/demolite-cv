@@ -4,8 +4,8 @@
 
 <CvHeaderDisplay/>
 
-<MudTabs Class="w-50 mobile-90 tab-border" Centered="true" Color="Color.Dark" TabHeaderClass="tab-header" SliderColor="Color.Primary">
-    <MudTabPanel Text="@Experience" Icon="@Icons.Material.Outlined.WorkHistory" Class="w-100 d-flex">
+<MudTabs Class="w-50 mobile-90 tab-border" Centered="true" Color="Color.Dark" SliderColor="Color.Primary">
+    <MudTabPanel Text="@Experience" Icon="@Icons.Material.Outlined.WorkHistory" Class="w-100 d-flex" >
         <div class="spacer-small"></div>
         @foreach (var entry in CvEntries)
         {
@@ -22,12 +22,19 @@
             <div class="spacer"></div>
         }
     </MudTabPanel>
+    @* <MudTabPanel Text="Projekte" Icon="@Icons.Material.Outlined.Portrait" Class="w-100 d-flex"> *@
+    @*     <div class="spacer-small"></div> *@
+    @*     @foreach (var projectEntry in ProjectEntries) *@
+    @*     { *@
+    @*         <ProjectEntryDisplay ProjectEntry="projectEntry"/> *@
+    @*         <div class="spacer"></div> *@
+    @*     } *@
+    @* </MudTabPanel> *@
     <MudTabPanel Text="@Skills" Icon="@Icons.Material.Outlined.Lightbulb" Class="w-100 d-flex">
         <div class="spacer-small"></div>
         @foreach (var skillEntry in SkillEntries)
         {
             <SkillEntryDisplay SkillEntry="skillEntry"/>
-
             <div class="spacer"></div>
         }
     </MudTabPanel>
