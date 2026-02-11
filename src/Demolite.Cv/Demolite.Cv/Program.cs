@@ -1,3 +1,4 @@
+using System.Globalization;
 using Demolite.Cv.Components;
 using Demolite.Cv.Startup;
 using Demolite.Cv.Ui.Components.Layout;
@@ -22,6 +23,9 @@ app.UseAntiforgery();
 
 app.MapStaticAssets();
 app.MapRazorComponents<App>().AddInteractiveServerRenderMode().AddAdditionalAssemblies(typeof(MainLayout).Assembly);
+
+CultureInfo.DefaultThreadCurrentCulture = CultureInfo.InvariantCulture;
+CultureInfo.DefaultThreadCurrentUICulture = CultureInfo.InvariantCulture;
 
 await app.MigrateDatabaseAsync();
 await app.RunAsync();
