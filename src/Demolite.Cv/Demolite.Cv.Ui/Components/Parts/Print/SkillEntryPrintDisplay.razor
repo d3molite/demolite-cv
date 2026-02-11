@@ -1,0 +1,23 @@
+﻿@using Demolite.Cv.Interfaces.Models
+
+@inherits AbstractLocalizedPrintDisplay
+
+<div class="d-flex flex-column w-100">
+    <div class="tp-heading-print">
+        @Title
+    </div>
+    <div class="tp-content-print">
+        @Description
+    </div>
+</div>
+
+@code {
+
+    [Parameter]
+    public required ISkillEntry SkillEntry { get; set; }
+
+    private string Title => IsGerman ? SkillEntry.Title : SkillEntry.TitleEn;
+
+    private MarkupString Description => IsGerman ? (MarkupString)SkillEntry.Skills : (MarkupString)SkillEntry.SkillsEn;
+
+}

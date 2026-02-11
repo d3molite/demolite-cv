@@ -1,0 +1,67 @@
+﻿@using Demolite.Cv.Db.Models
+@using Demolite.Cv.Interfaces.Repositories
+
+@inherits AbstractLocalizedPrintDisplay
+
+<div class="d-flex flex-row w-100 m-1">
+    <div class="image-wrapper">
+        <div class="image-container">
+            <img class="image" src="img/photos/cv.jpg" alt="Photo of Applicant"/>
+        </div>
+    </div>
+    <div class="d-flex flex-column justify-content-center align-items-center flex-grow-1">
+        <div class="tp-mainheading">
+            @Name
+        </div>
+        <div class="tp-subheading">
+            CURRICULUM&nbsp;VITAE
+        </div>
+        <div class="d-flex flex-row mt-2 gap-2 justify-content-between">
+            <div class="d-flex flex-row align-items-center gap-1">
+                <MudIcon Icon="@Icons.Material.Outlined.Web" Class="h-100" Size="Size.Large" Color="Color.Primary"/>
+                <div class="tp-content-print">
+                    cv.demolite.de<br/>
+                    github.com/d3molite
+                </div>
+            </div>
+            <div class="d-flex flex-row align-items-center gap-1">
+                <MudIcon Icon="@Icons.Material.Outlined.LocationOn" Class="h-100" Size="Size.Large" Color="Color.Primary"/>
+                <div class="tp-content-print">
+                    @Address
+                </div>
+            </div>
+            <div class="d-flex flex-row align-items-center gap-1">
+                <MudIcon Icon="@Icons.Material.Outlined.Mail" Class="h-100" Size="Size.Large" Color="Color.Primary"/>
+                <div class="tp-content-print">
+                    @Profile?.Mail
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+
+    [Inject]
+    public IDbRepository<Profile> ProfileRepository { get; set; } = null!;
+
+    private Profile? Profile { get; set; }
+
+    private MarkupString Name => Profile is null ? (MarkupString)string.Empty : (MarkupString)Profile.Name;
+
+    private MarkupString Address => Profile is null ? (MarkupString)string.Empty : (MarkupString)Profile.Address;
+
+    private string About => Profile is null ? string.Empty : LocalizeProperty(Profile, x => x.About);
+
+    private string AboutHeader => IsGerman ? "Über mich" : "About me";
+
+    private string InterestsHeader => IsGerman ? "Interessen & Hobbies" : "Interests & Hobbies";
+
+    private string Hobbies => Profile is null ? string.Empty : LocalizeProperty(Profile, x => x.Hobbies);
+
+    protected override async Task OnInitializedAsync()
+    {
+        Profile = (await ProfileRepository.GetAll()).FirstOrDefault();
+    }
+
+}

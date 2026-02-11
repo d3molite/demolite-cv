@@ -1,0 +1,33 @@
+html, body{
+    background: white !important;
+    color: black !important;
+}
+
+.a4-wrapper{
+    width: 100vw !important;
+    height: 100vh !important;
+    display: flex;
+    justify-content: center;
+}
+
+@media print {
+    .a4-wrapper {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 210mm;
+        margin: 0;
+        padding: 0;
+        display: block !important;
+    }
+
+    * {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+    
+    @page {
+        size: A4;
+        margin: 0;
+    }
+}

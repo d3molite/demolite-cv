@@ -13,4 +13,8 @@ public interface ICvEntry
 	public string Description { get; set; }
 	
 	public string DescriptionEn { get; set; }
+	
+	public string DescriptionShort { get; set; }
+	
+	public string DescriptionShortEn { get; set; }
 }

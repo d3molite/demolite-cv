@@ -1,0 +1,20 @@
+﻿@using MudBlazor.Utilities
+@inherits LayoutComponentBase
+
+<MudThemeProvider IsDarkMode="false" Theme="MainTheme"/>
+
+<div class="a4-wrapper">
+    @Body
+</div>
+
+@code {
+
+    public static MudTheme MainTheme => new() {PaletteLight = new PaletteLight()
+                                                             {
+                                                                 Primary = new MudColor("#0B9FAD"),
+                                                                 Dark = new MudColor("#191C24"),
+                                                                 Background = new MudColor("#FFF"),
+                                                                 Surface = new MudColor("#191C24"),
+                                                             }};
+    
+}

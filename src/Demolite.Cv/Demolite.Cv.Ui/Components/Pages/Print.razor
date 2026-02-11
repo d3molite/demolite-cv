@@ -1,9 +1,75 @@
+@layout A4PaperLayout
 @page "/Print"
+@using Demolite.Cv.Db.Models
+@using Demolite.Cv.Interfaces.Models
+@using Demolite.Cv.Interfaces.Repositories
+@using Demolite.Cv.Interfaces.Services
+@using Demolite.Cv.Ui.Components.Parts.Print
 
+<div class="a4paper">
+    <CvHeaderPrintDisplay IsGerman="true"/>
+    <div style="content: ''; height: 1mm;"></div>
+    <div class="d-flex flex-column" style="gap: 2mm;">
+        <div class="tp-section-print">
+            BERUFSERFAHRUNG
+        </div>
+        @foreach (var entry in CvEntries.Where(x => x is IWorkEntry))
+        {
+            <WorkEntryPrintDisplay WorkEntry="(IWorkEntry)entry" IsGerman="true"/>
+        }
+        <div style="content: ''; height: 1mm;"></div>
+        <div class="tp-section-print">
+            SKILLS & TOOLS
+        </div>
+        @foreach (var entry in SkillEntries)
+        {
+            <SkillEntryPrintDisplay SkillEntry="entry" IsGerman="true"/>
+        }
+    </div>
+</div>
+
+<div class="a4paper">
+    <CvHeaderPrintDisplay/>
+    <div style="content: ''; height: 1mm;"></div>
+    <div class="d-flex flex-column" style="gap: 2mm;">
+        <div class="tp-section-print">
+            WORK EXPERIENCE
+        </div>
+        @foreach (var entry in CvEntries.Where(x => x is IWorkEntry))
+        {
+            <WorkEntryPrintDisplay WorkEntry="(IWorkEntry)entry"/>
+        }
+        <div style="content: ''; height: 1mm;"></div>
+        <div class="tp-section-print">
+            SKILLS & TOOLS
+        </div>
+        @foreach (var entry in SkillEntries)
+        {
+            <SkillEntryPrintDisplay SkillEntry="entry"/>
+        }
+    </div>
+</div>
 
 
 @code {
 
-    
+    [Inject]
+    public ICvEntryService CvEntryService { get; set; } = null!;
+	
+    [Inject]
+    public IDbRepository<SkillEntry> SkillEntryRepository { get; set; } = null!;
+
+    [Inject]
+    public IDbRepository<ProjectEntry> ProjectEntryRepository { get; set; } = null!;
+
+    private ICvEntry[] CvEntries { get; set; } = [];
+	
+    private ISkillEntry[] SkillEntries { get; set; } = [];
+
+    protected override async Task OnInitializedAsync()
+    {
+        CvEntries = await CvEntryService.GetCvEntries();
+        SkillEntries = await SkillEntryRepository.GetAll();
+    }
 
 }

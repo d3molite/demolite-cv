@@ -1,0 +1,60 @@
+﻿@using System.Text
+@using Demolite.Cv.Interfaces.Models
+
+@inherits AbstractLocalizedPrintDisplay
+
+<div class="d-flex flex-column w-100" style="gap: 0.5mm;">
+    <div class="tp-heading-print">
+        @Title
+    </div>
+    <div class="d-flex flex-row w-100 justify-content-between">
+        <div class="tp-bold-print w-50">
+            @WorkEntry.CompanyName
+        </div>
+        <div class="tp-bold-print">
+            @WorkEntry.Location
+        </div>
+        <div class="tp-bold-print">
+            @GetDate()
+        </div>
+    </div>
+    <div class="tp-content-print">
+        @Description
+    </div>
+</div>
+
+
+@code {
+
+    [Parameter]
+    public required IWorkEntry WorkEntry { get; set; }
+
+    private string Title => LocalizeProperty(WorkEntry, x => x.Title);
+
+    private MarkupString Description
+    {
+        get
+        {
+            var value = LocalizePropertyMarkup(WorkEntry, x => x.DescriptionShort);
+            return string.IsNullOrEmpty(value.ToString()) ? LocalizePropertyMarkup(WorkEntry, x => x.Description) : value;
+        }
+    }
+
+    private string GetDate()
+    {
+        var sb = new StringBuilder();
+
+        sb.Append(WorkEntry.StartDate.ToString("MM/yyyy"));
+
+        sb.Append(" - ");
+
+        if (WorkEntry.EndDate is null)
+            sb.Append(IsGerman ? "Heute" : "Today");
+
+        else
+            sb.Append(WorkEntry.EndDate.Value.ToString("MM/yyyy"));
+
+        return sb.ToString();
+    }
+
+}

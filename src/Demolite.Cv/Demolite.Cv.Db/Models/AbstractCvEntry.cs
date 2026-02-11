@@ -16,4 +16,8 @@ public class AbstractCvEntry : AbstractDbItem, ICvEntry
 	public string Description { get; set; } = string.Empty;
 	
 	public string DescriptionEn { get; set; } = string.Empty;
+
+	public string DescriptionShort { get; set; } = string.Empty;
+
+	public string DescriptionShortEn { get; set; } = string.Empty;
 }

@@ -1,0 +1,69 @@
+﻿@using System.Globalization
+@using System.Text
+@using Demolite.Cv.Interfaces.Models
+@inherits AbstractLocalizedDisplay
+
+<Stack Class="w-100">
+    <div class="tp-heading">
+        <MudIcon Icon="@Icons.Material.Outlined.School"/>
+        @Title
+    </div>
+    <Stack Row="true" Class="w-100 justify-content-between">
+        <div class="tp-bold w-50 mobile-90">
+            @EducationEntry.SchoolName
+        </div>
+        <div class="tp-bold">
+            @Grade
+        </div>
+        <div class="tp-bold">
+            @GetDate()
+        </div>
+    </Stack>
+    <div class="tp-content">
+        @Description
+    </div>
+</Stack>
+
+@code {
+
+    [Parameter]
+    public required IEducationEntry EducationEntry { get; set; }
+    
+    private string Title => LocalizeProperty(EducationEntry, x => x.Title);
+
+    private MarkupString Description => LocalizePropertyMarkup(EducationEntry, x => x.Description);
+
+    private string Grade
+    {
+        get
+        {
+            if (string.IsNullOrWhiteSpace(EducationEntry.Grade))
+                return string.Empty;
+            
+            return IsGerman ? $"Note: {EducationEntry.Grade}" : $"Grade: {EducationEntry.Grade}";
+        }
+    }
+
+    private string GetDate()
+    {
+        var format = "MM/yyyy";
+        
+        if(string.IsNullOrWhiteSpace(EducationEntry.Grade))
+            format = "yyyy";
+            
+        var sb = new StringBuilder();
+
+        sb.Append(EducationEntry.StartDate.ToString(format));
+
+        sb.Append(" - ");
+
+        if (EducationEntry.EndDate is null)
+            sb.Append(IsGerman ? "Heute" : "Today");
+
+        else
+            sb.Append(EducationEntry.EndDate.Value.ToString(format));
+
+        return sb.ToString();
+    }
+
+}

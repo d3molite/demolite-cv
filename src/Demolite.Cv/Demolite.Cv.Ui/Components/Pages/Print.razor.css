@@ -1,4 +1,15 @@
-html{
+.a4paper{
+    width: 210mm !important;
+    height: 297mm !important;
     background: white !important;
     color: black !important;
+    margin: 5mm !important;
+    padding: 10mm 15mm !important;
+}
+
+@media print {
+    .a4paper {
+        margin: 0 !important;
+        box-shadow: none !important;
+    }
 }

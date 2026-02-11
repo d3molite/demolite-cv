@@ -1,0 +1,19 @@
+﻿@using System.Linq.Expressions
+@using Demolite.Cv.Common.Helpers
+@inherits LayoutComponentBase
+
+@code {
+
+    [Parameter]
+    public bool IsGerman { get; set; }
+    
+
+    protected MarkupString LocalizePropertyMarkup<T>(T obj, Expression<Func<T, string>> property)
+        where T : class
+        => (MarkupString)LocalizeProperty(obj, property);
+
+    protected string LocalizeProperty<T>(T obj, Expression<Func<T, string>> property)
+        where T : class
+        => obj.GetLocalizedPropertyValue(property, IsGerman);
+
+}
