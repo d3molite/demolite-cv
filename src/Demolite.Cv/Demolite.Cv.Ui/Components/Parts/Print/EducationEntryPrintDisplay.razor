@@ -1,28 +1,27 @@
-﻿@using System.Globalization
-@using System.Text
+﻿@using System.Text
 @using Demolite.Cv.Interfaces.Models
-@inherits AbstractLocalizedDisplay
 
-<Stack Class="w-100">
-    <div class="tp-heading">
-        <MudIcon Icon="@Icons.Material.Outlined.School"/>
+@inherits AbstractLocalizedPrintDisplay
+
+<div class="d-flex flex-column w-100" style="gap: 0.8mm;">
+    <div class="tp-heading-print">
         @Title
     </div>
-    <Stack Row="true" Class="w-100 justify-content-between">
-        <div class="tp-bold w-50 mobile-90">
+    <div class="d-flex flex-row w-100 justify-content-between">
+        <div class="tp-bold-print w-50">
             @EducationEntry.SchoolName
         </div>
-        <div class="tp-bold">
+        <div class="tp-bold-print">
             @Grade
         </div>
-        <div class="tp-bold">
+        <div class="tp-bold-print">
             @GetDate()
         </div>
-    </Stack>
-    <div class="tp-content">
+    </div>
+    <div class="tp-content-print">
         @Description
     </div>
-</Stack>
+</div>
 
 @code {
 

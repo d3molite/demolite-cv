@@ -137,6 +137,12 @@ html, body {
     color: var(--foreground-primary);
 }
 
+.tp-heading-print-sm{
+    font-size: 12pt;
+    font-weight: 300;
+    color: var(--foreground-primary);
+}
+
 .tp-bold{
     font-size: 1.5rem;
     font-weight: 300;
@@ -149,11 +155,6 @@ html, body {
 
 .tp-content{
     font-size: 1.2rem;
-    font-weight: 200;
-}
-
-.tp-content-print{
-    font-size: 10pt;
     font-weight: 200;
 }
 

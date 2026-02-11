@@ -14,10 +14,10 @@
 @code {
 
     [Parameter]
-    public required ISkillEntry SkillEntry { get; set; }
+    public required IHobbyEntry HobbyEntry { get; set; }
 
-    private string Title => IsGerman ? SkillEntry.Title : SkillEntry.TitleEn;
+    private string Title => LocalizeProperty(HobbyEntry, x => x.Title);
 
-    private MarkupString Description => IsGerman ? (MarkupString)SkillEntry.Skills : (MarkupString)SkillEntry.SkillsEn;
+    private MarkupString Description => LocalizePropertyMarkup(HobbyEntry, x => x.Description);
 
 }

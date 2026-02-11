@@ -36,7 +36,7 @@ public static class DependencyInjector
 		services.AddScoped<IDbRepository<WorkEntry>, WorkEntryRepository>();
 		services.AddScoped<IDbRepository<EducationEntry>, EducationEntryRepository>();
 		services.AddScoped<IDbRepository<SkillEntry>, SkillEntryRepository>();
-		
+		services.AddScoped<IDbRepository<HobbyEntry>, HobbyEntryRepository>();
 		services.AddScoped<IDbRepository<ProjectEntry>, ProjectEntryRepository>();
 	}
 

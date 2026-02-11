@@ -9,7 +9,7 @@ ENV CERT_PASS $CERT_PASS
 
 RUN mkdir https
 RUN dotnet dev-certs https -ep ./https/aspnetapp.pfx -p ${CERT_PASS}
-RUN dotnet dev-certs https --trust
+RUN dotnet dev-certs https
 
 WORKDIR /src
 COPY ["Demolite.Cv/Demolite.Cv.csproj", "Demolite.Cv/"]

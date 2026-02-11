@@ -1,4 +1,4 @@
-﻿services:
+services:
   demolite.cv:
     image: hub.demolite.de/demoreg/demolite.cv
     container_name: demolite.cv

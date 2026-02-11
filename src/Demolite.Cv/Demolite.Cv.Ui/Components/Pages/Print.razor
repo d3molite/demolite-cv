@@ -29,6 +29,26 @@
 </div>
 
 <div class="a4paper">
+    <div class="d-flex flex-column" style="gap: 2mm;">
+        <div class="tp-section-print">
+            BILDUNG
+        </div>
+        @foreach (var entry in CvEntries.Where(x => x is IEducationEntry))
+        {
+            <EducationEntryPrintDisplay EducationEntry="(IEducationEntry)entry" IsGerman="true"/>
+        }
+        <div style="content: ''; height: 1mm;"></div>
+        <div class="tp-section-print">
+            HOBBIES & INTERESSEN
+        </div>
+        @foreach (var entry in HobbyEntries)
+        {
+            <HobbyEntryPrintDisplay HobbyEntry="entry" IsGerman="true"/>
+        }
+    </div>
+</div>
+
+<div class="a4paper">
     <CvHeaderPrintDisplay/>
     <div style="content: ''; height: 1mm;"></div>
     <div class="d-flex flex-column" style="gap: 2mm;">
@@ -50,6 +70,26 @@
     </div>
 </div>
 
+<div class="a4paper">
+    <div class="d-flex flex-column" style="gap: 2mm;">
+        <div class="tp-section-print">
+            EDUCATION
+        </div>
+        @foreach (var entry in CvEntries.Where(x => x is IEducationEntry))
+        {
+            <EducationEntryPrintDisplay EducationEntry="(IEducationEntry)entry"/>
+        }
+        <div style="content: ''; height: 1mm;"></div>
+        <div class="tp-section-print">
+            HOBBIES & INTERESTS
+        </div>
+        @foreach (var entry in HobbyEntries)
+        {
+            <HobbyEntryPrintDisplay HobbyEntry="entry"/>
+        }
+    </div>
+</div>
+
 
 @code {
 
@@ -60,16 +100,19 @@
     public IDbRepository<SkillEntry> SkillEntryRepository { get; set; } = null!;
 
     [Inject]
-    public IDbRepository<ProjectEntry> ProjectEntryRepository { get; set; } = null!;
+    public IDbRepository<HobbyEntry> HobbyEntryRepository { get; set; } = null!;
 
     private ICvEntry[] CvEntries { get; set; } = [];
 	
     private ISkillEntry[] SkillEntries { get; set; } = [];
 
+    private IHobbyEntry[] HobbyEntries { get; set; } = [];
+
     protected override async Task OnInitializedAsync()
     {
         CvEntries = await CvEntryService.GetCvEntries();
         SkillEntries = await SkillEntryRepository.GetAll();
+        HobbyEntries = await HobbyEntryRepository.GetAll();
     }
 
 }
